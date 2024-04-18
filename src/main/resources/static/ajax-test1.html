@@ -1,0 +1,30 @@
+<html lang="kr">
+  <head>
+    <title>XHR</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <button id="loadDataButton">데이터 가져오기</button>
+    <script>
+      document.getElementById('loadDataButton').addEventListener('click', function() {
+        function onReadyStateChange() {
+          // XMLHttpRequest 를 활용한 AJAX 요청의 단계는 0 ~ 4 의 값을 가지는 상수로 구성
+          // UNSENT(요청 전): 0, OPENED(요청 초기화): 1, HEADERS_RECEIVED(호출됨): 2
+          // LOADING(응답 수신 중): 3, DONE(응답 로드 완료): 4
+          if (ajaxRequest.readyState === XMLHttpRequest.DONE) {
+            if (ajaxRequest.status === 200) {
+              console.log(ajaxRequest.responseText);
+            } else {
+              console.error('Request failed with status: ' + ajaxRequest.status);
+            }
+          }
+        }
+
+        const ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.onreadystatechange = onReadyStateChange;
+        ajaxRequest.open('GET', '/simple-ajax-test1');
+        ajaxRequest.send();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<html lang="kr">
+  <head>
+    <title>FETCH</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <button id="fetchButton">데이터 가져오기</button>
+    <script>
+      // 버튼 클릭 이벤트 핸들러에서 AJAX 호출
+      document.getElementById('fetchButton').addEventListener('click', function() {
+        fetch('/simple-ajax-test2')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+          });
+      });
+    </script>
+  </body>
+</html>
